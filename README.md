@@ -41,11 +41,9 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **[ Registeration ]**
+- Use the `Decorator` design pattern.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIVE DEMO -->
 
 <!-- GETTING STARTED -->
 
@@ -93,7 +91,8 @@ In order to run this project you need:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[Advance Features will be added ]**
+- **[Add basic UI ]**
+- **[Refactor code ]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
