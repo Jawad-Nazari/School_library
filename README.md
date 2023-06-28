@@ -42,6 +42,7 @@
 ### Key Features <a name="key-features"></a>
 
 - Use the `Decorator` design pattern.
+- Save records of who borrowed a book and when.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
