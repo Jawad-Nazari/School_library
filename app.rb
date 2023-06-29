@@ -1,7 +1,8 @@
-require 'student'
-require 'teacher'
-require 'book'
-require 'rental'
+require_relative 'student'
+require_relative 'person'
+require_relative 'teacher'
+require_relative 'rental'
+require_relative 'book'
 
 class App
   def initialize(parent)
@@ -72,5 +73,17 @@ class App
     else
       puts 'Invalid option, please reenter'
     end
+  end
+
+  def create_teacher
+    print 'Enter Teacher Age: '
+    age = gets.chomp
+    print 'Enter Teacher Name: '
+    name = gets.chomp
+    print 'Enter Teacher Specialization: '
+    specialization = gets.chomp
+    teacher = Teacher.new(age, specialization, name)
+    @people_list << teacher
+    puts 'Person created successfuly'
   end
 end
