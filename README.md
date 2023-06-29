@@ -42,7 +42,9 @@
 ### Key Features <a name="key-features"></a>
 
 - Use the `Decorator` design pattern.
-- Save records of who borrowed a book and when.
+- Register a new students or teachers.
+- Register new books with title and author name .
+- Show records of who borrowed a book and when.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
