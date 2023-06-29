@@ -21,7 +21,7 @@ class App
     @parent.show_menu
   end
 
-    def list_all_people
+  def list_all_people
     if @people_list.empty?
       puts 'There is no any available record! Please, add a person first'
     else
@@ -29,6 +29,20 @@ class App
       @people_list.each do |person|
         puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       end
+    end
+    @parent.show_menu
+  end
+
+  def create_person
+    puts 'Do you want to create a Student(1) or a Teacher(2)? [Enter the number]'
+    person_role = gets.chomp
+    case person_role
+    when '1'
+      create_student
+    when '2'
+      create_teacher
+    else
+      puts 'Please input a valid number!'
     end
     @parent.show_menu
   end
