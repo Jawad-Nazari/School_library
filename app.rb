@@ -117,4 +117,8 @@ class App
     end
     @parent.show_menu
   end
+
+  def exit
+    puts 'Thank you for using this application!'
+  end
 end
