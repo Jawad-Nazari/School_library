@@ -26,7 +26,7 @@ class App
     if @people_list.empty?
       puts 'There is no any available record! Please, add a person first'
     else
-      puts 'All avilable persons in the library are as below'
+      puts 'All available persons in the library are as below'
       @people_list.each do |person|
         puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       end
@@ -49,30 +49,21 @@ class App
   end
 
   def create_student
-    print 'Enter Student Age: '
-    age = gets.chomp.to_i
-
-    print 'Enter Student Name: '
+    print 'Enter student name: '
     name = gets.chomp
-
-    print 'Enter Student Classroom: '
+    print 'Enter student age: '
+    age = gets.chomp.to_i
+    print 'Enter student classroom: '
     classroom = gets.chomp.to_i
+    print 'Allowed by parents? [Yes/No]: '
+    parent_permission_input = gets.chomp.downcase
 
-    print 'Has Parent Permission? [Yes/No]: '
-    parent_permission = gets.chomp.downcase
+    parent_permission = parent_permission_input == 'yes'
 
-    case parent_permission
-    when 'yes'
-      student = Student.new(age, classroom, name, parent_permission: true)
-      @people_list << student
-      puts 'Student successfully registered'
-    when 'no'
-      student = Student.new(age, classroom, name, parent_permission: false)
-      @people_list << student
-      puts 'Student successfully registered'
-    else
-      puts 'Invalid option, please reenter'
-    end
+    student = Student.new(name, age, classroom, parent_permission: parent_permission)
+    @people_list << student
+
+    puts 'Student successfully registered'
   end
 
   def create_teacher
@@ -84,7 +75,7 @@ class App
     specialization = gets.chomp
     teacher = Teacher.new(age, specialization, name)
     @people_list << teacher
-    puts 'Person created successfuly'
+    puts 'Person created successfully'
   end
 
   def create_book
@@ -113,6 +104,17 @@ class App
     date = gets.chomp
     @rentals_list.push(Rental.new(date, @books_list[selected_book], @people_list[selected_person]))
     puts 'Rental created successfully'
+    @parent.show_menu
+  end
+
+  def list_all_rentals
+    print 'ID of person: '
+    id = gets.chomp.to_i
+
+    puts 'Rentals:'
+    @rentals_list.each do |rental|
+      puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}" if rental.person.id == id
+    end
     @parent.show_menu
   end
 end
