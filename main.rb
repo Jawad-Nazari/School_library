@@ -46,5 +46,4 @@ def main
   Options.new
 end
 
-
 main
