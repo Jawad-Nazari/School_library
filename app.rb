@@ -86,4 +86,14 @@ class App
     @people_list << teacher
     puts 'Person created successfuly'
   end
+
+  def create_book
+    print 'Enter a book name: '
+    title = gets.chomp
+    print 'Enter the author name: '
+    author = gets.chomp
+    book = Book.new(title, author)
+    @books_list << book
+    puts 'Book created successfully'
+  end
 end
