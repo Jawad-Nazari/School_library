@@ -46,4 +46,31 @@ class App
     end
     @parent.show_menu
   end
+
+  def create_student
+    print 'Enter Student Age: '
+    age = gets.chomp.to_i
+
+    print 'Enter Student Name: '
+    name = gets.chomp
+
+    print 'Enter Student Classroom: '
+    classroom = gets.chomp.to_i
+
+    print 'Has Parent Permission? [Yes/No]: '
+    parent_permission = gets.chomp.downcase
+
+    case parent_permission
+    when 'yes'
+      student = Student.new(age, classroom, name, parent_permission: true)
+      @people_list << student
+      puts 'Student successfully registered'
+    when 'no'
+      student = Student.new(age, classroom, name, parent_permission: false)
+      @people_list << student
+      puts 'Student successfully registered'
+    else
+      puts 'Invalid option, please reenter'
+    end
+  end
 end
