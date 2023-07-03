@@ -88,6 +88,12 @@ In order to run this project you need:
 - LinkedIn: [Jawad-Nazari](https://www.linkedin.com/in/jawad-nazari/)
 - Twitter: [@nazari_jawad58](https://twitter.com/nazari_jawad58)
 
+👤 **Mikey1-nuel**
+
+- GitHub: [Githubhandle](https://github.com/Mikey1-nuel)
+- Twitter: [Twitterhandle](https://twitter.com/Mikey_nuel)
+- LinkedIn: [LinkedInhandle](https://www.linkedin.com/in/emmanuel-nwoye-5915141b8/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
