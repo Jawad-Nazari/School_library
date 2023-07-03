@@ -3,40 +3,61 @@ require_relative 'person'
 require_relative 'teacher'
 require_relative 'rental'
 require_relative 'book'
+require_relative 'book_manager'
+require_relative 'people_manager'
+require_relative 'rental_manager'
+
+class BookInterface
+  def add_book(title, author)
+    raise NotImplementedError, 'Subclasses must implement this method'
+  end
+
+  def list_all_books
+    raise NotImplementedError, 'Subclasses must implement this method'
+  end
+end
+
+class BookManagerAdapter < BookInterface
+  def initialize(book_manager)
+    super()
+    @book_manager = book_manager
+  end
+
+  def add_book(title, author)
+    @book_manager.add_book(title, author)
+  end
+
+  def list_all_books
+    @book_manager.list_all_books
+  end
+end
 
 class App
   def initialize(parent)
     @parent = parent
     @books_list = []
-    @people_list = []
-    @rentals_list = []
+    @people_list = PeopleManager.new
+    @rentals_list = RentalManager.new
   end
 
   def list_all_books
     if @books_list.empty?
-      puts 'There is no any available record! Please, add some books first'
+      puts 'There are no available records! Please add some books first.'
     else
-      puts 'All available books in the library are as below'
+      puts 'All available books in the library are as below:'
       @books_list.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     end
     @parent.show_menu
   end
 
   def list_all_people
-    if @people_list.empty?
-      puts 'There is no any available record! Please, add a person first'
-    else
-      puts 'All available persons in the library are as below'
-      @people_list.each do |person|
-        puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      end
-    end
+    @people_list.list_all_people
     @parent.show_menu
   end
 
   def create_person
     puts 'Do you want to create a Student(1) or a Teacher(2)? [Enter the number]'
-    person_role = gets.chomp
+    person_role = @parent.request_input
     case person_role
     when '1'
       create_student
@@ -50,39 +71,36 @@ class App
 
   def create_student
     print 'Enter student name: '
-    name = gets.chomp
+    name = @parent.request_input
     print 'Enter student age: '
-    age = gets.chomp.to_i
+    age = @parent.request_input.to_i
     print 'Enter student classroom: '
-    classroom = gets.chomp.to_i
+    classroom = @parent.request_input.to_i
     print 'Allowed by parents? [Yes/No]: '
-    parent_permission_input = gets.chomp.downcase
-
+    parent_permission_input = @parent.request_input.downcase
     parent_permission = parent_permission_input == 'yes'
-
     student = Student.new(name, age, classroom, parent_permission: parent_permission)
-    @people_list << student
-
+    @people_list.add_person(student)
     puts 'Student successfully registered'
   end
 
   def create_teacher
-    print 'Enter Teacher Age: '
-    age = gets.chomp
     print 'Enter Teacher Name: '
-    name = gets.chomp
+    name = @parent.request_input
+    print 'Enter Teacher Age: '
+    age = @parent.request_input
     print 'Enter Teacher Specialization: '
-    specialization = gets.chomp
+    specialization = @parent.request_input
     teacher = Teacher.new(age, specialization, name)
-    @people_list << teacher
+    @people_list.add_person(teacher)
     puts 'Person created successfully'
   end
 
   def create_book
     print 'Enter a book name: '
-    title = gets.chomp
+    title = @parent.request_input
     print 'Enter the author name: '
-    author = gets.chomp
+    author = @parent.request_input
     book = Book.new(title, author)
     @books_list << book
     puts 'Book created successfully'
@@ -92,29 +110,27 @@ class App
   def create_rental
     puts 'Select a book from the following list by number'
     @books_list.each_with_index { |book, index| puts "#{index}) Title: '#{book.title}', Author: #{book.author}" }
-    selected_book = gets.chomp.to_i
+    selected_book = @parent.request_input.to_i
     puts
     puts 'Select a person from the following list by number (not id)'
-    @people_list.each_with_index do |person, index|
+    @people_list.instance_variable_get(:@people).each_with_index do |person, index|
       puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
-    selected_person = gets.chomp.to_i
-
+    selected_person = @parent.request_input.to_i
     print 'Date: '
-    date = gets.chomp
-    @rentals_list.push(Rental.new(date, @books_list[selected_book], @people_list[selected_person]))
+    date = @parent.request_input
+    rental = Rental.new(date, @books_list[selected_book],
+                        @people_list.instance_variable_get(:@people)[selected_person])
+    @rentals_list.add_rental(rental)
     puts 'Rental created successfully'
     @parent.show_menu
   end
 
   def list_all_rentals
     print 'ID of person: '
-    id = gets.chomp.to_i
-
+    person_id = @parent.request_input.to_i
     puts 'Rentals:'
-    @rentals_list.each do |rental|
-      puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}" if rental.person.id == id
-    end
+    @rentals_list.list_all_rentals(person_id)
     @parent.show_menu
   end
 
