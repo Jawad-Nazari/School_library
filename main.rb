@@ -17,8 +17,12 @@ class Options
     puts '5 -  Create a Rental'
     puts '6 -  List all Rentals for a given person id'
     puts '7 -  Exit'
-    user_choice = gets.chomp
+    user_choice = request_input
     select_option(user_choice)
+  end
+
+  def request_input
+    gets.chomp
   end
 
   def select_option(user_choice)
