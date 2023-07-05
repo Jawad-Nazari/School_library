@@ -1,0 +1,10 @@
+[
+  {
+    "json_class": "Student",
+    "data": {
+      "name": "Ali",
+      "age": 33,
+      "classroom": 1
+    }
+  }
+]
