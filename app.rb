@@ -8,7 +8,6 @@ require_relative 'people_manager'
 require_relative 'storage'
 require_relative 'rental_manager'
 
-
 class BookInterface
   def add_book(title, author)
     raise NotImplementedError, 'Subclasses must implement this method'
@@ -126,8 +125,6 @@ class App
     puts 'Rental created successfully'
     @parent.show_menu
   end
-
-
 
   private
 
