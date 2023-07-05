@@ -1,3 +1,4 @@
+require_relative 'rental'
 require 'json'
 
 class RentalManager
@@ -18,12 +19,15 @@ class RentalManager
   end
 
   def load_rentals_from_file(file_path)
-    @rentals = if File.exist?(file_path)
-                 JSON.parse(File.read(file_path), create_additions: true)
-               else
-
-                 []
-               end
+    if File.exist?(file_path) && !File.empty?(file_path)
+      file_contents = File.read(file_path)
+      @rentals = JSON.parse(file_contents, create_additions: true)
+    else
+      @rentals = []
+    end
+  rescue JSON::ParserError => e
+    puts "Error parsing JSON file: #{e.message}"
+    @rentals = []
   end
 
   def save_rentals_to_file(file_path)

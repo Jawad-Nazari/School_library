@@ -1,6 +1,3 @@
-require_relative 'book'
-require_relative 'person'
-
 class Rental
   attr_reader :date, :book, :person
 
@@ -16,12 +13,12 @@ class Rental
       'data' => {
         'date' => @date,
         'book' => @book,
-        'person' => @person
+        'person' => @person.to_hash
       }
     }.to_json(*args)
   end
 
   def self.json_create(object)
-    new(object['date'], object['book'], object['person'])
+    new(object['data']['date'], object['data']['book'], Person.from_hash(object['data']['person']))
   end
 end

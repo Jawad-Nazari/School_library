@@ -2,12 +2,29 @@
   {
     "json_class": "Rental",
     "data": {
-      "date": "5-6-22",
+      "date": "9-4-22",
       "book": {
-        "title": "New Book",
-        "author": "New Author"
+        "title": "Best Actions",
+        "author": "David"
       },
-      "person": null
+      "person": {
+        "name": "Ahmad",
+        "age": 34
+      }
+    }
+  },
+  {
+    "json_class": "Rental",
+    "data": {
+      "date": "7-3-2022",
+      "book": {
+        "title": "CSS Hack",
+        "author": "Jawad"
+      },
+      "person": {
+        "name": "Ali",
+        "age": 33
+      }
     }
   }
 ]

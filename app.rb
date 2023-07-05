@@ -118,6 +118,11 @@ class App
     puts
     display_people_list
     selected_person = select_person
+    if selected_person.nil?
+      puts 'Invalid person selection. Please select a valid person.'
+      @parent.show_menu
+      return
+    end
     date = enter_rental_date
     rental = Rental.new(date, @books_list[selected_book], @people_list.people[selected_person])
     @rentals_list.add_rental(rental)
@@ -125,6 +130,8 @@ class App
     puts 'Rental created successfully'
     @parent.show_menu
   end
+
+
 
   private
 
@@ -142,7 +149,7 @@ class App
   def display_people_list
     puts 'Select a person from the following list by number (not id)'
     @people_list.people.each_with_index do |person, index|
-      display_person_info(person, index + 1)
+      display_person_info(person, index)
     end
   end
 
@@ -155,7 +162,13 @@ class App
   end
 
   def select_person
-    @parent.request_input.to_i
+    input = @parent.request_input.to_i
+    if input >= 0 && input <= @people_list.people.length
+      input - 1
+    else
+      puts 'Invalid person selection. Please select a valid person.'
+      select_person # Retry selecting a valid person
+    end
   end
 
   def enter_rental_date
