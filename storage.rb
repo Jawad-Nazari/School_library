@@ -7,7 +7,7 @@ class Storage
   def self.save_data(class_name, object)
     file_path = "#{@base_url}#{class_name}.#{@file_extension}"
     File.open(file_path, 'w') do |file|
-      file.truncate(0) 
+      file.truncate(0)
       file.write(JSON.pretty_generate(object))
     end
   end

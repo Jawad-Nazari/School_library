@@ -45,6 +45,7 @@
 - Register a new students or teachers.
 - Register new books with title and author name .
 - Show records of who borrowed a book and when.
+- Used JSON files to save and load data
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
