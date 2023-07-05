@@ -131,8 +131,6 @@ class App
     @parent.show_menu
   end
 
-
-
   private
 
   def display_book_list
