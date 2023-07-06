@@ -1,13 +1,28 @@
-require_relative 'person'
+class Teacher
+  attr_reader :name, :age, :specialization
 
-class Teacher < Person
-  def initialize(age, specialization, name = 'Unknown', parent_permission: true)
-    super(age, parent_permission: parent_permission)
+  def initialize(name, age, specialization)
     @name = name
+    @age = age
     @specialization = specialization
   end
 
-  def can_use_services?
-    true
+  def to_json(*args)
+    {
+      'json_class' => self.class.name,
+      'data' => {
+        'name' => @name,
+        'age' => @age,
+        'specialization' => @specialization
+      }
+    }.to_json(*args)
+  end
+
+  def self.json_create(object)
+    new(object['data']['name'], object['data']['age'], object['data']['specialization'])
+  end
+
+  def inspect
+    @name
   end
 end
