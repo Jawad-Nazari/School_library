@@ -13,10 +13,10 @@ class RentalManager
   end
 
   def list_all_rentals(person)
-  @rentals.select { |rental| rental.person == person }.each do |rental|
-    puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}, Person: #{rental.person.name}"
+    @rentals.select { |rental| rental.person == person }.each do |rental|
+      puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}, Person: #{rental.person.name}"
+    end
   end
-end
 
   def load_rentals_from_file(file_path)
     if File.exist?(file_path) && !File.empty?(file_path)

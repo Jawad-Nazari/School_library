@@ -34,7 +34,7 @@ class Person < Nameable
   end
 
   def self.people
-    @people ||= [] 
+    @people ||= []
   end
 
   def to_hash

@@ -41,7 +41,7 @@ class App
     @books_list = Storage.load_data('books')
     @people_list = PeopleManager.new
     @rentals_list = RentalManager.new
-    @rentals_list.load_rentals_from_file('rentals.json') 
+    @rentals_list.load_rentals_from_file('rentals.json')
   end
 
   def list_all_books
@@ -113,30 +113,30 @@ class App
   end
 
   def create_rental
-  display_book_list
-  selected_book = select_book
-  puts
-  display_people_list
-  selected_person = select_person
-  if selected_person.nil?
-    puts 'Invalid person selection. Please select a valid person.'
+    display_book_list
+    selected_book = select_book
+    puts
+    display_people_list
+    selected_person = select_person
+    if selected_person.nil?
+      puts 'Invalid person selection. Please select a valid person.'
+      @parent.show_menu
+      return
+    end
+    date = enter_rental_date
+    create_and_add_rental(selected_book, selected_person, date)
+    @rentals_list.save_rentals_to_file('rentals.json')
+    puts 'Rental created successfully'
     @parent.show_menu
-    return
   end
-  date = enter_rental_date
-  create_and_add_rental(selected_book, selected_person, date)
-  @rentals_list.save_rentals_to_file('rentals.json')
-  puts 'Rental created successfully'
-  @parent.show_menu
-end
 
   def create_and_add_rental(selected_book, selected_person, date)
-  book_data = @books_list[selected_book]
-  book = Book.new(book_data['title'], book_data['author'])
-  person = @people_list.people[selected_person]
-  rental = Rental.new(date, book, person)
-  @rentals_list.add_rental(rental)
-end
+    book_data = @books_list[selected_book]
+    book = Book.new(book_data['title'], book_data['author'])
+    person = @people_list.people[selected_person]
+    rental = Rental.new(date, book, person)
+    @rentals_list.add_rental(rental)
+  end
 
   private
 
