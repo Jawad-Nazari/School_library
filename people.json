@@ -2,16 +2,24 @@
   {
     "json_class": "Student",
     "data": {
-      "name": "Ali",
-      "age": 33,
+      "name": "David",
+      "age": 22,
       "classroom": 1
     }
   },
   {
     "json_class": "Student",
     "data": {
-      "name": "Ahmad",
-      "age": 34,
+      "name": "Mike",
+      "age": 26,
+      "classroom": 2
+    }
+  },
+  {
+    "json_class": "Student",
+    "data": {
+      "name": "Peter",
+      "age": 32,
       "classroom": 1
     }
   }

@@ -1,10 +1,11 @@
 require_relative 'nameable'
+require_relative 'rental'
 
 class Person < Nameable
   attr_accessor :name, :age, :rentals
   attr_reader :id
 
-  @people = [] # Class instance variable to store all people
+  @people = [] 
 
   def initialize(age, name: 'Unknown', parent_permission: true)
     super()
@@ -13,7 +14,7 @@ class Person < Nameable
     @age = age
     @parent_permission = parent_permission
     @rentals = []
-    self.class.people << self # Add the person to the list of all people
+    self.class.people << self 
   end
 
   def can_use_services?
@@ -33,7 +34,7 @@ class Person < Nameable
   end
 
   def self.people
-    @people ||= [] # Initialize @people if it's nil
+    @people ||= [] 
   end
 
   def to_hash

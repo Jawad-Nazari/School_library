@@ -41,7 +41,7 @@ class App
     @books_list = Storage.load_data('books')
     @people_list = PeopleManager.new
     @rentals_list = RentalManager.new
-    @rentals_list.load_rentals_from_file('rentals.json') # Load rentals from the JSON file
+    @rentals_list.load_rentals_from_file('rentals.json') 
   end
 
   def list_all_books
@@ -112,24 +112,31 @@ class App
     @parent.show_menu
   end
 
-  def create_rental
-    display_book_list
-    selected_book = select_book
-    puts
-    display_people_list
-    selected_person = select_person
-    if selected_person.nil?
-      puts 'Invalid person selection. Please select a valid person.'
-      @parent.show_menu
-      return
-    end
-    date = enter_rental_date
-    rental = Rental.new(date, @books_list[selected_book], @people_list.people[selected_person])
-    @rentals_list.add_rental(rental)
-    @rentals_list.save_rentals_to_file('rentals.json')
-    puts 'Rental created successfully'
+def create_rental
+  display_book_list
+  selected_book = select_book
+  puts
+  display_people_list
+  selected_person = select_person
+  if selected_person.nil?
+    puts 'Invalid person selection. Please select a valid person.'
     @parent.show_menu
+    return
   end
+  date = enter_rental_date
+  create_and_add_rental(selected_book, selected_person, date) 
+  @rentals_list.save_rentals_to_file('rentals.json')
+  puts 'Rental created successfully'
+  @parent.show_menu
+end
+
+def create_and_add_rental(selected_book, selected_person, date)
+  book_data = @books_list[selected_book] 
+  book = Book.new(book_data['title'], book_data['author']) 
+  person = @people_list.people[selected_person] 
+  rental = Rental.new(date, book, person) 
+  @rentals_list.add_rental(rental) 
+end
 
   private
 
@@ -165,7 +172,7 @@ class App
       input - 1
     else
       puts 'Invalid person selection. Please select a valid person.'
-      select_person # Retry selecting a valid person
+      select_person
     end
   end
 
@@ -180,11 +187,15 @@ class App
   end
 
   def list_all_rentals
-    print 'ID of person: '
+    puts 'Enter the ID of the person:'
     person_id = @parent.request_input.to_i
-    puts "Person ID: #{person_id}"
-    puts 'Rentals:'
-    @rentals_list.list_all_rentals(person_id)
+    person = @people_list.people.find { |p| p.id == person_id }
+    if person.nil?
+      puts 'Invalid person ID. Please enter a valid ID.'
+    else
+      puts "Rentals for person: #{person.name}"
+      @rentals_list.list_all_rentals(person)
+    end
     @parent.show_menu
   end
 

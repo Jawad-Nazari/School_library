@@ -2,28 +2,36 @@
   {
     "json_class": "Rental",
     "data": {
-      "date": "9-4-22",
+      "date": "7-6-23",
       "book": {
-        "title": "Best Actions",
-        "author": "David"
+        "title": "CSS Best Styles",
+        "author": "Jawad"
       },
       "person": {
-        "name": "Ahmad",
-        "age": 34
+        "json_class": "Student",
+        "data": {
+          "name": "Mike",
+          "age": 26,
+          "classroom": 2
+        }
       }
     }
   },
   {
     "json_class": "Rental",
     "data": {
-      "date": "7-3-2022",
+      "date": "9-9-23",
       "book": {
-        "title": "CSS Hack",
-        "author": "Jawad"
+        "title": "Ruby on 40 hours",
+        "author": "Ali"
       },
       "person": {
-        "name": "Ali",
-        "age": 33
+        "json_class": "Student",
+        "data": {
+          "name": "Peter",
+          "age": 32,
+          "classroom": 1
+        }
       }
     }
   }

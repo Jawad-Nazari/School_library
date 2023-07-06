@@ -13,12 +13,12 @@ class Rental
       'data' => {
         'date' => @date,
         'book' => @book,
-        'person' => @person.to_hash
+        'person' => @person
       }
     }.to_json(*args)
   end
 
   def self.json_create(object)
-    new(object['data']['date'], object['data']['book'], Person.from_hash(object['data']['person']))
+    new(object['data']['date'], object['data']['book'], object['data']['person'])
   end
 end
