@@ -12,7 +12,7 @@ class RentalManager
     @rentals << rental
   end
 
-def list_all_rentals(person)
+  def list_all_rentals(person)
   @rentals.select { |rental| rental.person == person }.each do |rental|
     puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}, Person: #{rental.person.name}"
   end

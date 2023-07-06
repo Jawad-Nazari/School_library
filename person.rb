@@ -5,7 +5,7 @@ class Person < Nameable
   attr_accessor :name, :age, :rentals
   attr_reader :id
 
-  @people = [] 
+  @people = []
 
   def initialize(age, name: 'Unknown', parent_permission: true)
     super()
@@ -14,7 +14,7 @@ class Person < Nameable
     @age = age
     @parent_permission = parent_permission
     @rentals = []
-    self.class.people << self 
+    self.class.people << self
   end
 
   def can_use_services?

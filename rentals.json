@@ -34,5 +34,20 @@
         }
       }
     }
+  },
+  {
+    "json_class": "Rental",
+    "data": {
+      "date": "7-9-23",
+      "book": "#<Book:0x06110b38>",
+      "person": {
+        "json_class": "Student",
+        "data": {
+          "name": "Mike",
+          "age": 26,
+          "classroom": 2
+        }
+      }
+    }
   }
 ]

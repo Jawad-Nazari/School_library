@@ -112,7 +112,7 @@ class App
     @parent.show_menu
   end
 
-def create_rental
+  def create_rental
   display_book_list
   selected_book = select_book
   puts
@@ -124,18 +124,18 @@ def create_rental
     return
   end
   date = enter_rental_date
-  create_and_add_rental(selected_book, selected_person, date) 
+  create_and_add_rental(selected_book, selected_person, date)
   @rentals_list.save_rentals_to_file('rentals.json')
   puts 'Rental created successfully'
   @parent.show_menu
 end
 
-def create_and_add_rental(selected_book, selected_person, date)
-  book_data = @books_list[selected_book] 
-  book = Book.new(book_data['title'], book_data['author']) 
-  person = @people_list.people[selected_person] 
-  rental = Rental.new(date, book, person) 
-  @rentals_list.add_rental(rental) 
+  def create_and_add_rental(selected_book, selected_person, date)
+  book_data = @books_list[selected_book]
+  book = Book.new(book_data['title'], book_data['author'])
+  person = @people_list.people[selected_person]
+  rental = Rental.new(date, book, person)
+  @rentals_list.add_rental(rental)
 end
 
   private
@@ -179,11 +179,6 @@ end
   def enter_rental_date
     print 'Date: '
     @parent.request_input
-  end
-
-  def create_and_add_rental(selected_book, selected_person, date)
-    rental = Rental.new(date, @books_list[selected_book], @people_list.people[selected_person])
-    @rentals_list.add_rental(rental)
   end
 
   def list_all_rentals
